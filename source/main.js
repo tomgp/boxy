@@ -95,8 +95,13 @@ box.set({
 	depth:100
 });
 
-box.set({ 
-	width:100,
-	height:100,
-	depth:150
-});
+d3.selectAll('input[type="range"]')
+	.each(setByValue)
+	.on('input', setByValue);
+
+function setByValue(){
+	box.set({
+		[this.dataset.property]:Number(this.value)
+	});
+}
+

@@ -16,6 +16,10 @@
 			display:inline-block;
 			width:70px;	
 		}
+
+		input[type="range"]{
+			width:100%;
+		}
 	</style>
 </head>
 <body>
@@ -23,9 +27,9 @@
     <h1>BOXY</h1>
     <p class="subtitle">Tom Pearson November 2015</p>
     <section class="input">
-    	<br><label>Width</label> <input min="0" max="100" type="range" data-property="blockWidth"> <span data-property="blockWidth" class="slider-value"></span><span class="unit"></span>
-		<br><label>Height</label> <input min="0" max="100" type="range" data-property="blockHeight"> <span data-property="blockHeight" class="slider-value"></span><span class="unit"></span>
-		<br><label>Depth</label> <input min="0" max="100" type="range" data-property="blockDepth"> <span data-property="blockDepth" class="slider-value"></span><span class="unit"></span>
+    	<br><label>Width</label> <input min="0" max="100" type="range" data-property="width"> <span data-property="width" class="slider-value"></span><span class="unit"></span>
+		<br><label>Height</label> <input min="0" max="100" type="range" data-property="height"> <span data-property="height" class="slider-value"></span><span class="unit"></span>
+		<br><label>Depth</label> <input min="0" max="100" type="range" data-property="depth"> <span data-property="depth" class="slider-value"></span><span class="unit"></span>
     </section>
     <section>
 		<svg class="output" width="400" height="400">
