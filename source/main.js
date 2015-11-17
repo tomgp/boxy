@@ -5,6 +5,24 @@ var d3 = require('d3');
 var axonometric = require('./axonometric.js');
 var projection = axonometric();
 
+function boxFactory(){
+	var model = {
+		width:undefined, 
+		height:undefined,
+		depth:undefined,
+		dispatcher:d3.dispatch('change')
+	}
+
+	model.set = function(o){
+		if(!isNaN(o.width)) model.width = o.width;
+		if(!isNaN(o.height)) model.height = o.height;
+		if(!isNaN(o.depth)) model.depth = o.depth;
+		model.dispatcher.change(model);	//notify of a change
+	}
+
+	return model;
+}
+
 function drawBox(width,height,depth){
 	var edges = [	//for a back-face occluded box
 		[ [0,height,depth], [0,height,0] ],
@@ -25,6 +43,7 @@ function drawBox(width,height,depth){
 		}
 	});
 
+	console.log(projectedEdges.length)
 
 	var cardinalPoints = [
 		{
@@ -42,7 +61,13 @@ function drawBox(width,height,depth){
 	];
 
 	d3.select('svg')
-		.append('g').attr('transform','translate(200,200)')
+		.selectAll('g.origin').data([[200,200]]).enter()
+		.append('g').attr({
+			'transform': function(d){ return 'translate('+d[0]+','+d[1]+')'; },
+			'class': 'origin'
+		})
+
+	d3.select('.origin')
 		.selectAll('.edge')
 			.data(projectedEdges)
 		.enter()
@@ -58,4 +83,20 @@ function drawBox(width,height,depth){
 
 }
 
-drawBox(100,100,100);
+var box = boxFactory();
+
+box.dispatcher.on('change', function(m){
+	drawBox(m.width, m.height, m.depth);
+});
+
+box.set({ 
+	width:100,
+	height:100,
+	depth:100
+});
+
+box.set({ 
+	width:100,
+	height:100,
+	depth:150
+});
