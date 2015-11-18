@@ -7,18 +7,18 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<style type="text/css">
 		line.edge{
-			fill:none;
-			stroke-width:1px;
-			stroke:#000;
+			fill: none;
+			stroke-width: 1px;
+			stroke: #000;
 		}
 
 		label { 
-			display:inline-block;
-			width:70px;	
+			display: block;
+			width: 100%;	
 		}
 
 		input[type="range"]{
-			width:100%;
+			width: 100%;
 		}
 	</style>
 </head>
@@ -27,14 +27,11 @@
     <h1>BOXY</h1>
     <p class="subtitle">Tom Pearson November 2015</p>
     <section class="input">
-    	<br><label>Width</label> <input min="0" max="100" type="range" data-property="width"> <span data-property="width" class="slider-value"></span><span class="unit"></span>
-		<br><label>Height</label> <input min="0" max="100" type="range" data-property="height"> <span data-property="height" class="slider-value"></span><span class="unit"></span>
-		<br><label>Depth</label> <input min="0" max="100" type="range" data-property="depth"> <span data-property="depth" class="slider-value"></span><span class="unit"></span>
+    	<br><label data-property="width">Width</label> <input min="1" max="100" type="range" data-property="width"> <span data-property="width" class="slider-value"></span><span class="unit"></span>
+		<br><label data-property="height">Height</label> <input min="1" max="100" type="range" data-property="height"> <span data-property="height" class="slider-value"></span><span class="unit"></span>
+		<br><label data-property="depth">Depth</label> <input min="1" max="100" type="range" data-property="depth"> <span data-property="depth" class="slider-value"></span><span class="unit"></span>
     </section>
-    <section>
-		<svg class="output" width="400" height="400">
-			
-		</svg>
+    <section class="output">
 	</section>
   </article>
 </body>
