@@ -1,92 +1,40 @@
 'use strict';
 
 var d3 = require('d3');
-
+var drawBox = require('./box-draw.js');
 var axonometric = require('./axonometric.js');
-var projection = axonometric();
+var box = require('./box-model.js')();
 
-function boxFactory(){
-	var model = {
-		width:undefined, 
-		height:undefined,
-		depth:undefined,
-		dispatcher:d3.dispatch('change')
-	}
-
-	model.set = function(o){
-		if(!isNaN(o.width)) model.width = o.width;
-		if(!isNaN(o.height)) model.height = o.height;
-		if(!isNaN(o.depth)) model.depth = o.depth;
-		model.dispatcher.change(model);	//notify of a change
-	}
-
-	return model;
+var width = 400, height = 400;
+var margin = {
+	top:20,
+	left:20,
+	bottom:20,
+	right:20
 }
 
-function drawBox(width,height,depth){
-	var edges = [	//for a back-face occluded box
-		[ [0,height,depth], [0,height,0] ],
-		[ [0,height,0], [width,height,0] ],
-		[ [width,height,0], [width,0,0] ],
-		[ [width,0,0], [width,0,depth] ],
-		[ [width,0,depth], [0,0,depth] ],
-		[ [0,0,depth], [0,height,depth] ],
-		[ [0,height,depth], [width,height,depth] ],
-		[ [width,height,depth], [width,height,0] ],
-		[ [width,height,depth], [width,0,depth] ]
-	];
+var max = 0;
+var boxDrawer = drawBox();
+var projection = boxDrawer.projection()
 
-	var projectedEdges = edges.map(function(d){
-		return {
-			start:projection(d[0]),
-			end:projection(d[1])
-		}
+d3.selectAll('input[type="range"]')
+	.each(function(){
+		max = Math.max(max, Number(this.max));
 	});
 
-	console.log(projectedEdges.length)
+var domain = [0, projection([-max, -max, max])[1]];
 
-	var cardinalPoints = [
-		{
-			attr:'width',
-			position:[width,0,0]
-		},
-		{
-			attr:'height',
-			position:[0,height,0]
-		},
-		{
-			attr:'depth',
-			position:[0,0,depth]
-		}
-	];
+var scale = d3.scale.linear()
+				.domain(domain)
+				.range([0, height - (margin.top+margin.bottom)])
 
-	d3.select('svg')
-		.selectAll('g.origin').data([[200,200]]).enter()
-		.append('g').attr({
-			'transform': function(d){ return 'translate('+d[0]+','+d[1]+')'; },
-			'class': 'origin'
-		})
 
-	d3.select('.origin')
-		.selectAll('.edge')
-			.data(projectedEdges)
-		.enter()
-			.append('line').attr('class', 'edge');
+boxDrawer.origin([width/2, height-margin.bottom])
+	.scale( scale );
 
-	d3.selectAll('.edge')
-		.attr({
-			x1:function(d){ return d.start[0]; },
-			y1:function(d){ return d.start[1]; },
-			x2:function(d){ return d.end[0]; },
-			y2:function(d){ return d.end[1]; }
-		});
-
-}
-
-var box = boxFactory();
 
 box.dispatcher.on('change', function(m){
-	drawBox(m.width, m.height, m.depth);
+	d3.select('svg').call(boxDrawer, [m.width,m.height,m.depth]);
 });
 
 box.set({ 
@@ -100,7 +48,7 @@ d3.selectAll('input[type="range"]')
 	.on('input', setByValue);
 
 function setByValue(){
-	box.set({
+	box.set({ 
 		[this.dataset.property]:Number(this.value)
 	});
 }
