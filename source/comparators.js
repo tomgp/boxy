@@ -23,14 +23,18 @@ module.exports = function(){
 
 		parent.selectAll('use').data([d])
 			.enter()
-			.append('g').attr('transform', function(d){
+				.append('g').attr('id','comparator-anchor')
+				.append('use');
+
+		parent.select('g#comparator-anchor')
+			.attr('transform', function(d){
 				var xPos = position[0] + (scale(d.width*100));
 				var yPos = position[1] - (scale(d.height*100));
-				return 'translate(' + [xPos, yPos] + ')';
-			})
-			.append('use');
+				return 'translate(' + position + ')';
+			});
 
-		parent.selectAll('use')
+		parent.select('g#comparator-anchor')
+			.selectAll('use')
 			.attr({
 				'xlink:href':function(d){
 					return d.file + '#' + d.id;

@@ -1,5 +1,6 @@
 ##BOXY
 
+
 ##TODO
 dynamically determine scale
 add more comparisons
@@ -8,6 +9,5 @@ print out volume, face areas etc.
 convert everything to meters
 grid
 
-##Tennis ball graphic
-from the Noun ProjectCreated by Claudio Gomboli
+Tennis ball graphic -- From the Noun Project Created by Claudio Gomboli
 

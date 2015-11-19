@@ -12,6 +12,7 @@ module.exports = function (){
 		if(!isNaN(o.width)) model.width = o.width;
 		if(!isNaN(o.height)) model.height = o.height;
 		if(!isNaN(o.depth)) model.depth = o.depth;
+		model.volume = model.width*model.height*model.depth;
 		model.dispatcher.change(model);	//notify of a change
 	}
 
