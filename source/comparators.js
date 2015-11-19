@@ -28,8 +28,6 @@ module.exports = function(){
 
 		parent.select('g#comparator-anchor')
 			.attr('transform', function(d){
-				var xPos = position[0] + (scale(d.width*100));
-				var yPos = position[1] - (scale(d.height*100));
 				return 'translate(' + position + ')';
 			});
 

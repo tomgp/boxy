@@ -17,12 +17,12 @@ function boxDrawer(){
 			[ [0,height,depth], [0,height,0] ],
 			[ [0,height,0], [width,height,0] ],
 			[ [width,height,0], [width,0,0] ],
-			[ [width,0,0], [width,0,depth] ],
-			[ [width,0,depth], [0,0,depth] ],
+			//[ [width,0,0], [width,0,depth] ],		//commented out edges effect backface culling
+			//[ [width,0,depth], [0,0,depth] ],
 			[ [0,0,depth], [0,height,depth] ],
 			[ [0,height,depth], [width,height,depth] ],
 			[ [width,height,depth], [width,height,0] ],
-			[ [width,height,depth], [width,0,depth] ],
+			//[ [width,height,depth], [width,0,depth] ],
 			[ [0,0,0], [0,height,0] ],
 			[ [0,0,0], [width,0,0] ],
 			[ [0,0,0], [0,0,depth] ]
