@@ -1,10 +1,6 @@
 var d3 = require('d3');
 
-// d3.csv('size-data.csv',function(data){
-// 	console.log( JSON.stringify(data) );
-// });
-
-//all images should be default be 100x100, & aligned to the bottom of that area
+//all images should be default be 100x100, & the bottom of the shape should be aligned to y=0
 var data = [{
 	"item":"Tennis ball",
 	"file":"ball.svg",

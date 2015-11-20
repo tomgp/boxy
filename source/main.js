@@ -6,8 +6,8 @@ var axonometric = require('./axonometric.js');
 var box = require('./box-model.js')();
 var comparator = require('./comparators.js');
 var valueFormat = d3.format('.2r');
-var width = 600;
-var height = 600;
+var width = 400;
+var height = 400;
 var margin = {
 	top:20,
 	left:20,
@@ -48,7 +48,7 @@ d3.select('.visualisation')
 
 comparisonDrawer
 	.scale( scale )
-	.position( origin );
+	.position( [origin[0]+20,origin[1]] );
 
 boxDrawer.origin(origin)
 	.scale( scale );
